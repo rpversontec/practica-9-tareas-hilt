@@ -5,14 +5,16 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import mx.tec.tareas.data.TareasRepository
 import mx.tec.tareas.domain.Tarea
+import javax.inject.Inject
 
-class TareasViewModel : ViewModel() {
-
-    // El ViewModel construye todo lo que necesita
-    private val repo = TareasRepository()
+@HiltViewModel
+class TareasViewModel @Inject constructor(
+    private val repo: TareasRepository
+) : ViewModel() {
 
     var tareas by mutableStateOf<List<Tarea>>(emptyList())
         private set
